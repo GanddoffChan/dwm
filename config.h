@@ -11,7 +11,7 @@ static const int focusonwheel         	= 0;
 static const char *fonts[]            	= { "Terminus (TTF):size=12" };
 static const char dmenufont[]         	= "Terminus (TTF):size=12";
 static const char normfgcolor[]     	= "#dddddd";
-static const char normbgcolor[]     	= "#000000";
+static const char normbgcolor[]     	= "#222222";
 static const char selfgcolor[]      	= "#ffffff";
 static const char selbgcolor[]      	= "#000000";
 static const char normbordercolor[] 	= "#000000";
@@ -73,7 +73,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbordercolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
@@ -102,16 +102,18 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      			togglealttag,   	{0} },
 
 	{ MODKEY, 			XK_a, 	   			spawn, 	   		SHCMD("audacity")},
-	{ MODKEY, 			XK_b, 	   			spawn, 	   		SHCMD("qutebrowser")},
+	{ MODKEY, 			XK_b, 	   			spawn, 	   		SHCMD("brave")},
 	{ MODKEY, 			XK_c, 	   			spawn, 	   		SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
 	{ MODKEY, 			XK_f, 	   			spawn, 	   		SHCMD("st -e lf")},
 	{ MODKEY, 			XK_g, 	   			spawn, 	   		SHCMD("gimp")},
 	{ MODKEY, 			XK_m, 	   			spawn, 	   		SHCMD("musescore")},
 	{ MODKEY, 			XK_s, 	   			spawn, 	   		SHCMD("spotifyd && st -e spt")},
 	{ MODKEY, 			XK_w, 	   			spawn, 	   		SHCMD("st -e nmtui")},
+	{ MODKEY, 			XK_y, 	   			spawn, 	   		SHCMD("myyt")},
 	{ MODKEY|ShiftMask, 		XK_b, 	   			spawn, 	   		SHCMD("qutebrowser --target private-window")},
-	{ MODKEY|ShiftMask, 		XK_f, 	   			spawn, 	   		SHCMD("spacefm")},
-	{ MODKEY|ShiftMask, 		XK_l, 	   			spawn, 	   		SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\"")},
+	{ MODKEY|ShiftMask, 		XK_h, 	   			spawn, 	   		SHCMD("st -e htop")},
+	{ MODKEY|ShiftMask, 		XK_f, 	   			spawn, 	   		SHCMD("pcmanfm")},
+	{ MODKEY|ShiftMask, 		XK_l, 	   			spawn, 	   		SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\" & (sleep 5 && xset dpms force off)")},
 	{ MODKEY|ShiftMask, 		XK_p, 	   			spawn, 	   		SHCMD("poweroff")},
 	{ MODKEY|ShiftMask, 		XK_r, 	   			spawn, 	   		SHCMD("reboot")},
 
