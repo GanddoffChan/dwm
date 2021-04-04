@@ -33,6 +33,18 @@ static const unsigned int alphas[][3]      = {
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {"st", "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spcmd1},
+	{"spcalc",      spcmd2},
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[] = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
@@ -51,14 +63,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ NULL,       NULL,       NULL,       0,            False,       -1 },
+	/* class        instance        title           tags mask       isfloating      monitor */
+	{ NULL,         NULL,           NULL,           0,              False,          -1 },
+	{ NULL,	        "spterm",       NULL,           SPTAG(0),       1,              -1 },
+	{ NULL,		"spcalc",	NULL,		SPTAG(1),	1,		-1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -66,16 +80,16 @@ static const Layout layouts[] = {
         /* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
         { "TTT",      bstack },
-	{ "[M]",      monocle },
         { "[@]",      spiral },
+	{ "[M]",      monocle },
+        { "|M|",      centeredmaster },
         //{ "[\\]",     dwindle },
         //{ "H[]",      deck },
         //{ "===",      bstackhoriz },
         //{ "HHH",      grid },
-        { "###",      nrowgrid },
+        //{ "###",      nrowgrid },
         //{ "---",      horizgrid },
         //{ ":::",      gaplessgrid },
-        { "|M|",      centeredmaster },
         //{ ">M>",      centeredfloatingmaster },
         { "><>",      NULL },    /* no layout function means floating behavior */
         { NULL,       NULL },
@@ -101,6 +115,7 @@ static Key keys[] = {
 	/* modifier                     key        			function        	argument */
 	{ MODKEY,                       XK_d,      			spawn,          	{.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, 			spawn,          	{.v = termcmd } },
+	{ MODKEY|ShiftMask,		XK_Return,	                togglescratch,	        {.ui = 0} },
 	{ MODKEY|ControlMask,           XK_b,      			togglebar,      	{0} },
 	{ MODKEY,                       XK_j,      			focusstack,     	{.i = -1 } },
 	{ MODKEY,                       XK_k,      			focusstack,     	{.i = +1 } },
@@ -148,7 +163,7 @@ static Key keys[] = {
 	{ 0, 				XF86XK_MonBrightnessUp,		spawn,			SHCMD("brightnessctl -e s +10%") },
 	{ 0, 				XK_Print,			spawn,			SHCMD("scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/scrots/'") },
 	{ MODKEY,			XK_F11,	   			spawn,          	SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
-	{ MODKEY,                       XK_c,		                spawn,		SHCMD("st -e bc -lq") },
+	{ MODKEY,			XK_c,	                        togglescratch,	        {.ui = 1} },
 
 	{ MODKEY,                       XK_bracketleft,  		incrgaps,        	{.i = +5 } },
 	{ MODKEY,                       XK_bracketright,  		incrgaps,        	{.i = -5 } },
