@@ -1,43 +1,46 @@
---- dwm.c
-+++ dwm.c
-@@ -212,7 +216,6 @@ static void sigchld(int unused);
- static void spawn(const Arg *arg);
- static void tag(const Arg *arg);
- static void tagmon(const Arg *arg);
--static void tile(Monitor *);
- static void togglebar(const Arg *arg);
- static void togglefloating(const Arg *arg);
- static void toggletag(const Arg *arg);
-@@ -1678,32 +1685,6 @@ tagmon(const Arg *arg)
- 	sendmon(selmon->sel, dirtomon(arg->i));
- }
+--- dwm.c	2021-02-27 20:04:32.030570909 -0600
++++ dwm.c	2021-03-15 16:32:23.693639390 -0500
+@@ -719,20 +729,36 @@ drawbar(Monitor *m)
+ 		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+ 	}
  
--void
--tile(Monitor *m)
--{
--	unsigned int i, n, h, mw, my, ty;
--	Client *c;
--
--	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
--	if (n == 0)
--		return;
--
--	if (n > m->nmaster)
--		mw = m->nmaster ? m->ww * m->mfact : 0;
--	else
--		mw = m->ww;
--	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
--		if (i < m->nmaster) {
--			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
--			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
--			my += HEIGHT(c);
--		} else {
--			h = (m->wh - ty) / (n - i);
--			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
--			ty += HEIGHT(c);
--		}
--}
--
- void
- togglebar(const Arg *arg)
- {
++	for (i = 0; i < LENGTH(tags); i++)
++		masterclientontag[i] = NULL;
++
+ 	for (c = m->clients; c; c = c->next) {
+-		occ |= c->tags;
++		occ |= c->tags == 255 ? 0 : c->tags;
+ 		if (c->isurgent)
+ 			urg |= c->tags;
++		for (i = 0; i < LENGTH(tags); i++)
++			if (!masterclientontag[i] && c->tags & (1<<i)) {
++				XClassHint ch = { NULL, NULL };
++				XGetClassHint(dpy, c->win, &ch);
++				masterclientontag[i] = ch.res_class;
++				if (lcaselbl)
++				masterclientontag[i][0] = tolower(masterclientontag[i][0]);
++			}
+ 	}
+ 	x = 0;
+ 	for (i = 0; i < LENGTH(tags); i++) {
+-		w = TEXTW(tags[i]);
++		/* do not draw vacant tags */
++		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
++		continue;
++
++		if (masterclientontag[i])
++			snprintf(tagdisp, 64, ptagf, tags[i], masterclientontag[i]);
++		else
++			snprintf(tagdisp, 64, etagf, tags[i]);
++		masterclientontag[i] = tagdisp;
++		tagw[i] = w = TEXTW(masterclientontag[i]);
+ 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+-		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+-		if (occ & 1 << i)
+-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
+-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+-				urg & 1 << i);
++		drw_text(drw, x, 0, w, bh, lrpad / 2, masterclientontag[i], urg & 1 << i);
+ 		x += w;
+ 	}
+ 	w = blw = TEXTW(m->ltsymbol);
