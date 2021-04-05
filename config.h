@@ -15,7 +15,7 @@ static const int focusonwheel         	= 0;
 static const char *fonts[]            	= { "Terminus (TTF):size=12" };
 static const char dmenufont[]         	= "Terminus (TTF):size=12";
 static const char normfgcolor[]     	= "#dddddd";
-static const char normbgcolor[]     	= "#000000";
+static const char normbgcolor[]     	= "#222222";
 static const char selfgcolor[]      	= "#ffffff";
 static const char selbgcolor[]      	= "#000000";
 static const char normbordercolor[] 	= "#000000";
@@ -116,33 +116,34 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      			spawn,          	{.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, 			spawn,          	{.v = termcmd } },
 	{ MODKEY|ShiftMask,		XK_Return,	                togglescratch,	        {.ui = 0} },
-	{ MODKEY|ControlMask,           XK_b,      			togglebar,      	{0} },
-	{ MODKEY,                       XK_j,      			focusstack,     	{.i = -1 } },
-	{ MODKEY,                       XK_k,      			focusstack,     	{.i = +1 } },
-	{ MODKEY,                       XK_i,      			incnmaster,     	{.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_i,      			incnmaster,     	{.i = -1 } },
-	{ MODKEY,                       XK_h,      			setmfact,       	{.f = -0.05} },
-	{ MODKEY,                       XK_l,      			setmfact,       	{.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_j, 				zoom,           	{0} },
-	{ MODKEY|ShiftMask,             XK_k, 				zoom,           	{0} },
-	{ MODKEY|ShiftMask,             XK_Tab,    			view,           	{0} },
-	{ MODKEY,             		XK_q,      			killclient,     	{0} },
 	{ MODKEY,			XK_Tab,  			cyclelayout,    	{.i = +1 } },
 	{ MODKEY,			XK_space,  			togglefloating,    	{0} },
+	{ MODKEY,             		XK_q,      			killclient,     	{0} },
 	{ MODKEY,                       XK_0,      			view,           	{.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      			tag,            	{.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  			focusmon,       	{.i = -1 } },
+	{ MODKEY,                       XK_h,      			setmfact,       	{.f = -0.05} },
+	{ MODKEY,                       XK_i,      			incnmaster,     	{.i = +1 } },
+	{ MODKEY,                       XK_j,      			focusstack,     	{.i = -1 } },
+	{ MODKEY,                       XK_k,      			focusstack,     	{.i = +1 } },
+	{ MODKEY,                       XK_l,      			setmfact,       	{.f = +0.05} },
 	{ MODKEY,                       XK_period, 			focusmon,       	{.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  			tagmon,         	{.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, 			tagmon,         	{.i = +1 } },
 	{ MODKEY,                       XK_t,      			togglealttag,   	{0} },
+	{ MODKEY|ControlMask,           XK_b,      			togglebar,      	{0} },
+	{ MODKEY|ShiftMask,             XK_0,      			tag,            	{.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_Tab,    			view,           	{0} },
+	{ MODKEY|ShiftMask,             XK_comma,  			tagmon,         	{.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_i,      			incnmaster,     	{.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j, 				zoom,           	{0} },
+	{ MODKEY|ShiftMask,             XK_k, 				zoom,           	{0} },
+	{ MODKEY|ShiftMask,             XK_period, 			tagmon,         	{.i = +1 } },
 
 	{ MODKEY, 			XK_a, 	   			spawn, 	   		SHCMD("audacity")},
 	{ MODKEY, 			XK_b, 	   			spawn, 	   		SHCMD("brave")},
-	{ MODKEY|ShiftMask, 		XK_g, 	   			spawn, 	   		SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
+	{ MODKEY|ShiftMask, 		XK_c, 	   			spawn, 	   		SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
 	{ MODKEY, 			XK_f, 	   			spawn, 	   		SHCMD("st -e lf")},
 	{ MODKEY, 			XK_g, 	   			spawn, 	   		SHCMD("gimp")},
 	{ MODKEY, 			XK_m, 	   			spawn, 	   		SHCMD("musescore")},
+	{ MODKEY, 			XK_r, 	   			spawn, 	   		SHCMD("st -e newsboat")},
 	{ MODKEY, 			XK_s, 	   			spawn, 	   		SHCMD("spotifyd && st -e spt")},
 	{ MODKEY, 			XK_w, 	   			spawn, 	   		SHCMD("st -e nmtui")},
 	{ MODKEY, 			XK_y, 	   			spawn, 	   		SHCMD("myyt")},
