@@ -1,3 +1,6 @@
+#define TERMINAL "st"
+#define TERMCLASS "st"
+
 #include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
 
@@ -37,8 +40,8 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -62,11 +65,13 @@ static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
-	 */
-	/* class        instance        title           tags mask       isfloating      monitor */
-	{ NULL,         NULL,           NULL,           0,              False,          -1 },
-	{ NULL,	        "spterm",       NULL,           SPTAG(0),       1,              -1 },
-	{ NULL,		"spcalc",	NULL,		SPTAG(1),	1,		-1 },
+	*/
+	/* class    instance      title       	 tags mask    isfloating   isterminal  monitor */
+	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,        -1 },
+	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,        -1 },
+	{ NULL,       NULL,       "Event Tester",   0,            0,           0,        -1 },
+	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,        -1 },
+	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,        -1 },
 };
 
 /* layout(s) */
@@ -109,7 +114,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 
 static Key keys[] = {
 	/* modifier                     key        			function        	argument */
@@ -140,15 +145,15 @@ static Key keys[] = {
 	{ MODKEY, 			XK_a, 	   			spawn, 	   		SHCMD("audacity")},
 	{ MODKEY, 			XK_b, 	   			spawn, 	   		SHCMD("brave")},
 	{ MODKEY|ShiftMask, 		XK_c, 	   			spawn, 	   		SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
-	{ MODKEY, 			XK_f, 	   			spawn, 	   		SHCMD("st -e lf")},
+	{ MODKEY, 			XK_f, 	   			spawn, 	   		SHCMD(TERMINAL " -e lf")},
 	{ MODKEY, 			XK_g, 	   			spawn, 	   		SHCMD("gimp")},
 	{ MODKEY, 			XK_m, 	   			spawn, 	   		SHCMD("musescore")},
-	{ MODKEY, 			XK_r, 	   			spawn, 	   		SHCMD("st -e newsboat")},
-	{ MODKEY, 			XK_s, 	   			spawn, 	   		SHCMD("spotifyd && st -e spt")},
-	{ MODKEY, 			XK_w, 	   			spawn, 	   		SHCMD("st -e nmtui")},
+	{ MODKEY, 			XK_r, 	   			spawn, 	   		SHCMD(TERMINAL " -e newsboat")},
+	{ MODKEY, 			XK_s, 	   			spawn, 	   		SHCMD("spotifyd && " TERMINAL " -e spt")},
+	{ MODKEY, 			XK_w, 	   			spawn, 	   		SHCMD(TERMINAL " -e nmtui")},
 	{ MODKEY, 			XK_y, 	   			spawn, 	   		SHCMD("myyt")},
 	{ MODKEY|ShiftMask, 		XK_b, 	   			spawn, 	   		SHCMD("qutebrowser --target private-window")},
-	{ MODKEY|ShiftMask, 		XK_h, 	   			spawn, 	   		SHCMD("st -e htop")},
+	{ MODKEY|ShiftMask, 		XK_h, 	   			spawn, 	   		SHCMD(TERMINAL " -e htop")},
 	{ MODKEY|ShiftMask, 		XK_f, 	   			spawn, 	   		SHCMD("pcmanfm")},
 	{ MODKEY|ShiftMask, 		XK_l, 	   			spawn, 	   		SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\" & (sleep 5 && xset dpms force off)")},
 	{ MODKEY|ShiftMask, 		XK_p, 	   			spawn, 	   		SHCMD("poweroff")},
@@ -196,3 +201,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
