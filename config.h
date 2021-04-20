@@ -1,5 +1,5 @@
 #define TERMINAL "st"
-#define TERMCLASS "st"
+#define TERMCLASS "St"
 
 #include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
@@ -7,7 +7,6 @@
 /* appearance */
 static const unsigned int borderpx    	= 1;        /* border pixel of windows */
 static const unsigned int snap        	= 32;       /* snap pixel */
-static const int swallowfloating    	= 1;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih        = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv        = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh        = 10;       /* horiz outer gap between windows and screen edge */
@@ -24,8 +23,8 @@ static const char selfgcolor[]      	= "#ffffff";
 static const char selbgcolor[]      	= "#000000";
 static const char normbordercolor[] 	= "#000000";
 static const char selbordercolor[]  	= "#ffffff";
-static const unsigned int baralpha    	= 0xc0;
-static const unsigned int borderalpha 	= 0xc0;
+static const unsigned int baralpha    	= 0xd0;
+static const unsigned int borderalpha 	= 0xd0;
 static const char *colors[][3]        	= {
 	/*               fg         	bg         	border   */
 	[SchemeNorm] = { normfgcolor, 	normbgcolor, 	normbordercolor },
@@ -67,11 +66,13 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	*/
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	//{ "st",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
- };
+	/* class    instance      title       	 tags mask    isfloating   isterminal  monitor */
+	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,        -1 },
+	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,        -1 },
+	{ NULL,       NULL,       "Event Tester",   0,            0,           0,        -1 },
+	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,        -1 },
+	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,        -1 },
+};
 
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
