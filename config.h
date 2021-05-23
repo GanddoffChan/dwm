@@ -20,11 +20,11 @@ static const char dmenufont[]         	= "Terminus (TTF):size=12";
 static const char normfgcolor[]     	= "#bbbbbb";
 static const char selfgcolor[]      	= "#eeeeee";
 static const char normbgcolor[]     	= "#222222";
-static const char selbgcolor[]      	= "#007755";
+static const char selbgcolor[]      	= "#005577";
 static const char normbordercolor[] 	= "#444444";
 static const char selbordercolor[]  	= "#770000";
-static const unsigned int baralpha    	= 0xd0;
-static const unsigned int borderalpha 	= 0xd0;
+static const unsigned int baralpha    	= 0xff;
+static const unsigned int borderalpha 	= 0xff;
 static const char *colors[][3]        	= {
 	/*               fg         	bg         	border   */
 	[SchemeNorm] = { normfgcolor, 	normbgcolor, 	normbordercolor },
@@ -167,7 +167,7 @@ static Key keys[] = {
 	{ 0, 				XF86XK_AudioRaiseVolume,	spawn,			SHCMD("pamixer -i 5") },
 	{ 0, 				XF86XK_MonBrightnessDown,	spawn,			SHCMD("brightnessctl -e s 10%-") },
 	{ 0, 				XF86XK_MonBrightnessUp,		spawn,			SHCMD("brightnessctl -e s +10%") },
-	{ 0, 				XK_Print,			spawn,			SHCMD("scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/scrots/'") },
+	{ 0, 				XK_Print,			spawn,			SHCMD("scrot -e 'mv $f ~/Pictures/scrots/'") },
 	{ MODKEY,			XK_F11,	   			spawn,          	SHCMD("mpv --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	{ MODKEY|ControlMask,		XK_w,	   			spawn,          	SHCMD("mpv --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=whomst ~/Videos/whomst.mp4-QoCcDi8zH8M.mkv") },
 	{ MODKEY,			XK_c,	                        togglescratch,	        {.ui = 1} },
