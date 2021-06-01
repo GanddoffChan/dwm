@@ -146,6 +146,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, 		XK_c, 	   			spawn, 	   		SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
 	{ MODKEY|ShiftMask, 		XK_y, 	   			spawn, 	   		SHCMD("brave --app-id=agimnkijcaahngcdmfeangaknmldooml")},
 	{ MODKEY, 			XK_f, 	   			spawn, 	   		SHCMD(TERMINAL " -e lf")},
+	{ MODKEY, 			XK_e, 	   			spawn, 	   		SHCMD(TERMINAL " -e neomutt")},
 	{ MODKEY, 			XK_g, 	   			spawn, 	   		SHCMD("gimp")},
 	{ MODKEY, 			XK_m, 	   			spawn, 	   		SHCMD("musescore")},
 	{ MODKEY, 			XK_r, 	   			spawn, 	   		SHCMD(TERMINAL " -e newsboat")},
@@ -158,6 +159,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, 		XK_l, 	   			spawn, 	   		SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\" & (sleep 5 && xset dpms force off)")},
 	{ MODKEY|ShiftMask, 		XK_p, 	   			spawn, 	   		SHCMD("poweroff")},
 	{ MODKEY|ShiftMask, 		XK_r, 	   			spawn, 	   		SHCMD("reboot")},
+	{ MODKEY, 			XK_v, 	   			spawn, 	   		SHCMD("virt-manager")},
 
 	{ 0, 				XF86XK_AudioLowerVolume,	spawn,			SHCMD("pamixer -d 5") },
 	{ 0, 				XF86XK_AudioMute,		spawn,			SHCMD("pamixer -t") },
