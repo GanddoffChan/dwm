@@ -15,14 +15,14 @@ static const int smartgaps              = 0;        /* 1 means no outer gap when
 static const int showbar                = 1;        /* 0 means no bar */
 static const int topbar                 = 1;        /* 0 means bottom bar */
 static const int focusonwheel           = 0;
-static const char *fonts[]              = { "Terminus (TTF):size=12" };
+static const char *fonts[]              = { "Terminus (TTF):size=12","JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static const char dmenufont[]           = "Terminus (TTF):size=12";
 static const char normfgcolor[]         = "#bdae93";
 static const char selfgcolor[]          = "#fbf1c7";
-static const char normbgcolor[]         = "#1d2021";
-static const char selbgcolor[]          = "#77241d";
+static const char normbgcolor[]         = "#222222";
+static const char selbgcolor[]          = "#9d0006";
 static const char normbordercolor[]     = "#282828";
-static const char selbordercolor[]      = "#77241d";
+static const char selbordercolor[]      = "#9d0006";
 static const unsigned int baralpha      = 0xcd;
 static const unsigned int borderalpha   = 0xcd;
 static const char *colors[][3]          = {
@@ -56,10 +56,10 @@ static const char ptagf[] = "[%s %s]";  /* format of a tag label */
 static const char etagf[] = "[%s]"; /* format of an empty tag */
 static const int lcaselbl = 0;      /* 1 means make tag label lowercase */
 
-static const unsigned int ulinepad  = 5;    /* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke   = 1;    /* thickness / height of the underline */
+static const unsigned int ulinepad      = 5;    /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke   = 0;    /* thickness / height of the underline */
 static const unsigned int ulinevoffset  = 0;    /* how far above the bottom of the bar the line should appear */
-static const int ulineall       = 0;    /* 1 to show underline on all tags, 0 for just the active ones */
+static const int ulineall               = 0;    /* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -112,7 +112,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 
 static Key keys[] = {
