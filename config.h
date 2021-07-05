@@ -42,10 +42,12 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spnmtui", "-g", "120x34", "-e", "nmtui", NULL };
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"spterm",      spcmd1},
     {"spcalc",      spcmd2},
+    {"spnmtui",     spcmd3},
 };
 
 /* tagging */
@@ -71,6 +73,7 @@ static const Rule rules[] = {
     {  NULL,         NULL,       "Event Tester",   0,              0,           0,         },
     {  NULL,         "spterm",   NULL,             SPTAG(0),       1,           1,         },
     {  NULL,         "spcalc",   NULL,             SPTAG(1),       1,           1,         },
+    {  NULL,         "spnmtui",  NULL,             SPTAG(2),       1,           1,         },
 };
 
 /* layout(s) */
@@ -141,7 +144,6 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_k,                       zoom,               {0} },
     { MODKEY|ShiftMask,     XK_period,                  tagmon,             {.i = +1 } },
 
-    { MODKEY,               XK_a,                       spawn,              SHCMD("audacity")},
     { MODKEY,               XK_b,                       spawn,              SHCMD("brave")},
     { MODKEY|ShiftMask,     XK_c,                       spawn,              SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
     { MODKEY|ShiftMask,     XK_y,                       spawn,              SHCMD("brave --app-id=agimnkijcaahngcdmfeangaknmldooml")},
@@ -151,7 +153,7 @@ static Key keys[] = {
     { MODKEY,               XK_m,                       spawn,              SHCMD("musescore")},
     { MODKEY,               XK_r,                       spawn,              SHCMD(TERMINAL " -e newsboat")},
     { MODKEY,               XK_s,                       spawn,              SHCMD("spotifyd && " TERMINAL " -e spt")},
-    { MODKEY,               XK_w,                       spawn,              SHCMD(TERMINAL " -e nmtui")},
+    { MODKEY,               XK_w,                       togglescratch,      {.ui = 2}},
     { MODKEY,               XK_y,                       spawn,              SHCMD("myyt")},
     { MODKEY|ShiftMask,     XK_b,                       spawn,              SHCMD("qutebrowser --target private-window")},
     { MODKEY|ShiftMask,     XK_h,                       spawn,              SHCMD(TERMINAL " -e htop")},
