@@ -17,13 +17,13 @@ static const int topbar                 = 1;        /* 0 means bottom bar */
 static const int focusonwheel           = 0;
 static const char *fonts[]              = { "Terminus (TTF):size=12","JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static const char dmenufont[]           = "Terminus (TTF):size=12";
-static const char normfgcolor[]         = "#bdae93";
-static const char selfgcolor[]          = "#fbf1c7";
-static const char normbgcolor[]         = "#222222";
-static const char selbgcolor[]          = "#9d0006";
+static const char normfgcolor[]         = "#eeeeee";
+static const char selfgcolor[]          = "#eeeeee";
+static const char normbgcolor[]         = "#4b406d";
+static const char selbgcolor[]          = "#62548f";
 static const char normbordercolor[]     = "#282828";
-static const char selbordercolor[]      = "#9d0006";
-static const unsigned int baralpha      = 0xcd;
+static const char selbordercolor[]      = "#62548f";
+static const unsigned int baralpha      = 0xff;
 static const unsigned int borderalpha   = 0xcd;
 static const char *colors[][3]          = {
     /*               fg             bg          border   */
