@@ -5,7 +5,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx      = 3;        /* border pixel of windows */
+static const unsigned int borderpx      = 2;        /* border pixel of windows */
 static const unsigned int snap          = 32;       /* snap pixel */
 static const unsigned int gappih        = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv        = 10;       /* vert inner gap between windows */
@@ -144,7 +144,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_k,                       zoom,               {0} },
     { MODKEY|ShiftMask,     XK_period,                  tagmon,             {.i = +1 } },
 
-    { MODKEY,               XK_b,                       spawn,              SHCMD("brave")},
+    { MODKEY,               XK_b,                       spawn,              SHCMD("brave-bin")},
     { MODKEY|ShiftMask,     XK_c,                       spawn,              SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
     { MODKEY|ShiftMask,     XK_y,                       spawn,              SHCMD("brave --app-id=agimnkijcaahngcdmfeangaknmldooml")},
     { MODKEY,               XK_f,                       spawn,              SHCMD(TERMINAL " -e lf")},
@@ -169,9 +169,10 @@ static Key keys[] = {
     { 0,                    XF86XK_AudioPlay,           spawn,              SHCMD("playerctl play-pause") },
     { 0,                    XF86XK_AudioPrev,           spawn,              SHCMD("playerctl previous") },
     { 0,                    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer -i 5") },
-    { 0,                    XF86XK_MonBrightnessDown,   spawn,              SHCMD("brightnessctl -e s 10%-") },
-    { 0,                    XF86XK_MonBrightnessUp,     spawn,              SHCMD("brightnessctl -e s +10%") },
+    { 0,                    XF86XK_MonBrightnessDown,   spawn,              SHCMD("xbacklight -10") },
+    { 0,                    XF86XK_MonBrightnessUp,     spawn,              SHCMD("xbacklight +10") },
     { 0,                    XK_Print,                   spawn,              SHCMD("scrot -e 'mv $f ~/Pictures/scrots/'") },
+    { MODKEY,               XK_Print,                   spawn,              SHCMD("scrot -s -e 'mv $f ~/Pictures/'") },
     { MODKEY,               XK_F11,                     spawn,              SHCMD("mpv --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
     { MODKEY|ControlMask,   XK_w,                       spawn,              SHCMD("mpv --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=whomst ~/Videos/whomst.mp4-QoCcDi8zH8M.mkv") },
     { MODKEY,               XK_c,                       togglescratch,      {.ui = 1} },
