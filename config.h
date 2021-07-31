@@ -15,16 +15,16 @@ static const int smartgaps              = 0;        /* 1 means no outer gap when
 static const int showbar                = 1;        /* 0 means no bar */
 static const int topbar                 = 1;        /* 0 means bottom bar */
 static const int focusonwheel           = 0;
-static const char *fonts[]              = { "Terminus (TTF):size=12","JoyPixels:pixelsize=10:antialias=true:autohint=true" };
-static const char dmenufont[]           = "Terminus (TTF):size=12";
-static const char normfgcolor[]         = "#eeeeee";
+static char *fonts[]                    = { "monospace:size=10", "Joypixels:pixelsize=10:antialias=true:autohint=true"  };
+static const char dmenufont[]           = "monospace:size=10";
+static const char normfgcolor[]         = "#bbbbbb";
 static const char selfgcolor[]          = "#eeeeee";
-static const char normbgcolor[]         = "#4b406d";
-static const char selbgcolor[]          = "#62548f";
-static const char normbordercolor[]     = "#282828";
-static const char selbordercolor[]      = "#62548f";
+static const char normbgcolor[]         = "#222222";
+static const char selbgcolor[]          = "#005577";
+static const char normbordercolor[]     = "#444444";
+static const char selbordercolor[]      = "#00aaee";
 static const unsigned int baralpha      = 0xff;
-static const unsigned int borderalpha   = 0xcd;
+static const unsigned int borderalpha   = 0xff;
 static const char *colors[][3]          = {
     /*               fg             bg          border   */
     [SchemeNorm] = { normfgcolor,   normbgcolor,    normbordercolor },
@@ -159,8 +159,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_h,                       spawn,              SHCMD(TERMINAL " -e htop")},
     { MODKEY|ShiftMask,     XK_f,                       spawn,              SHCMD("pcmanfm")},
     { MODKEY|ShiftMask,     XK_l,                       spawn,              SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\" & (sleep 5 && xset dpms force off)")},
-    { MODKEY|ShiftMask,     XK_p,                       spawn,              SHCMD("poweroff")},
-    { MODKEY|ShiftMask,     XK_r,                       spawn,              SHCMD("reboot")},
+    { MODKEY|ShiftMask,     XK_p,                       spawn,              SHCMD("doas poweroff")},
+    { MODKEY|ShiftMask,     XK_r,                       spawn,              SHCMD("doas reboot")},
     { MODKEY,               XK_v,                       spawn,              SHCMD("virt-manager")},
 
     { 0,                    XF86XK_AudioLowerVolume,    spawn,              SHCMD("pamixer -d 5") },
@@ -169,8 +169,8 @@ static Key keys[] = {
     { 0,                    XF86XK_AudioPlay,           spawn,              SHCMD("playerctl play-pause") },
     { 0,                    XF86XK_AudioPrev,           spawn,              SHCMD("playerctl previous") },
     { 0,                    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer -i 5") },
-    { 0,                    XF86XK_MonBrightnessDown,   spawn,              SHCMD("xbacklight -10") },
-    { 0,                    XF86XK_MonBrightnessUp,     spawn,              SHCMD("xbacklight +10") },
+	{ 0,                    XF86XK_MonBrightnessUp,	    spawn,		        SHCMD("expbl inc") },
+	{ 0,                    XF86XK_MonBrightnessDown,	spawn,		        SHCMD("expbl dec") },
     { 0,                    XK_Print,                   spawn,              SHCMD("scrot -e 'mv $f ~/Pictures/scrots/'") },
     { MODKEY,               XK_Print,                   spawn,              SHCMD("scrot -s -e 'mv $f ~/Pictures/'") },
     { MODKEY,               XK_F11,                     spawn,              SHCMD("mpv --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
