@@ -22,7 +22,7 @@ static const char selfgcolor[]          = "#eeeeee";
 static const char normbgcolor[]         = "#222222";
 static const char selbgcolor[]          = "#005577";
 static const char normbordercolor[]     = "#444444";
-static const char selbordercolor[]      = "#00aaee";
+static const char selbordercolor[]      = "#005577";
 static const unsigned int baralpha      = 0xff;
 static const unsigned int borderalpha   = 0xff;
 static const char *colors[][3]          = {
@@ -42,12 +42,10 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
-const char *spcmd3[] = {TERMINAL, "-n", "spnmtui", "-g", "80x50", "-e", "nmtui", NULL };
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"spterm",      spcmd1},
     {"spcalc",      spcmd2},
-    {"spnmtui",     spcmd3},
 };
 
 /* tagging */
@@ -73,7 +71,6 @@ static const Rule rules[] = {
     {  NULL,         NULL,       "Event Tester",   0,              0,           0,         },
     {  NULL,         "spterm",   NULL,             SPTAG(0),       1,           1,         },
     {  NULL,         "spcalc",   NULL,             SPTAG(1),       1,           1,         },
-    {  NULL,         "spnmtui",  NULL,             SPTAG(2),       1,           1,         },
 };
 
 /* layout(s) */
@@ -145,15 +142,14 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_period,                  tagmon,             {.i = +1 } },
 
     { MODKEY,               XK_b,                       spawn,              SHCMD("brave-bin")},
-    { MODKEY|ShiftMask,     XK_c,                       spawn,              SHCMD("brave --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
-    { MODKEY|ShiftMask,     XK_y,                       spawn,              SHCMD("brave --app-id=agimnkijcaahngcdmfeangaknmldooml")},
+    { MODKEY|ShiftMask,     XK_c,                       spawn,              SHCMD("brave-bin --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
+    { MODKEY|ShiftMask,     XK_y,                       spawn,              SHCMD("brave-bin --app-id=agimnkijcaahngcdmfeangaknmldooml")},
     { MODKEY,               XK_f,                       spawn,              SHCMD(TERMINAL " -e lf")},
     { MODKEY,               XK_e,                       spawn,              SHCMD(TERMINAL " -e neomutt")},
     { MODKEY,               XK_g,                       spawn,              SHCMD("gimp")},
     { MODKEY,               XK_m,                       spawn,              SHCMD("musescore")},
     { MODKEY,               XK_r,                       spawn,              SHCMD(TERMINAL " -e newsboat")},
     { MODKEY,               XK_s,                       spawn,              SHCMD("spotifyd && " TERMINAL " -e spt")},
-    { MODKEY,               XK_w,                       togglescratch,      {.ui = 2}},
     { MODKEY,               XK_y,                       spawn,              SHCMD("myyt")},
     { MODKEY|ShiftMask,     XK_b,                       spawn,              SHCMD("qutebrowser --target private-window")},
     { MODKEY|ShiftMask,     XK_h,                       spawn,              SHCMD(TERMINAL " -e htop")},
@@ -169,8 +165,8 @@ static Key keys[] = {
     { 0,                    XF86XK_AudioPlay,           spawn,              SHCMD("playerctl play-pause") },
     { 0,                    XF86XK_AudioPrev,           spawn,              SHCMD("playerctl previous") },
     { 0,                    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer -i 5") },
-	{ 0,                    XF86XK_MonBrightnessUp,	    spawn,		        SHCMD("expbl inc") },
-	{ 0,                    XF86XK_MonBrightnessDown,	spawn,		        SHCMD("expbl dec") },
+	{ 0,                    XF86XK_MonBrightnessUp,	    spawn,		        SHCMD("brightnessctl s -e 5%+") },
+	{ 0,                    XF86XK_MonBrightnessDown,	spawn,		        SHCMD("brightnessctl s -e 5%-") },
     { 0,                    XK_Print,                   spawn,              SHCMD("scrot -e 'mv $f ~/Pictures/scrots/'") },
     { MODKEY,               XK_Print,                   spawn,              SHCMD("scrot -s -e 'mv $f ~/Pictures/'") },
     { MODKEY,               XK_F11,                     spawn,              SHCMD("mpv --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
