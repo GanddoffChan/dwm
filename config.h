@@ -5,7 +5,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx      = 2;        /* border pixel of windows */
+static const unsigned int borderpx      = 3;        /* border pixel of windows */
 static const unsigned int snap          = 32;       /* snap pixel */
 static const unsigned int gappih        = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv        = 10;       /* vert inner gap between windows */
@@ -15,8 +15,8 @@ static const int smartgaps              = 0;        /* 1 means no outer gap when
 static const int showbar                = 1;        /* 0 means no bar */
 static const int topbar                 = 1;        /* 0 means bottom bar */
 static const int focusonwheel           = 0;
-static char *fonts[]                    = { "monospace:size=10", "Joypixels:pixelsize=10:antialias=true:autohint=true"  };
-static const char dmenufont[]           = "monospace:size=10";
+static char *fonts[]                    = { "Inconsolata:size=11", "Joypixels:pixelsize=11:antialias=true:autohint=true"  };
+static const char dmenufont[]           = "Inconsolata:size=11";
 static const char normfgcolor[]         = "#bbbbbb";
 static const char selfgcolor[]          = "#eeeeee";
 static const char normbgcolor[]         = "#222222";
@@ -24,11 +24,11 @@ static const char selbgcolor[]          = "#005577";
 static const char normbordercolor[]     = "#444444";
 static const char selbordercolor[]      = "#005577";
 static const unsigned int baralpha      = 0xff;
-static const unsigned int borderalpha   = 0xff;
+static const unsigned int borderalpha   = 0xcd;
 static const char *colors[][3]          = {
-    /*               fg             bg          border   */
+    /*               fg             bg              border   */
     [SchemeNorm] = { normfgcolor,   normbgcolor,    normbordercolor },
-    [SchemeSel]  = { selfgcolor,    selbgcolor, selbordercolor },
+    [SchemeSel]  = { selfgcolor,    selbgcolor,     selbordercolor },
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border     */
@@ -142,14 +142,13 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_period,                  tagmon,             {.i = +1 } },
 
     { MODKEY,               XK_b,                       spawn,              SHCMD("brave-bin")},
-    { MODKEY|ShiftMask,     XK_c,                       spawn,              SHCMD("brave-bin --app-id=ppkkplnhefiifjmgokbhhjebbddhiipf")},
-    { MODKEY|ShiftMask,     XK_y,                       spawn,              SHCMD("brave-bin --app-id=agimnkijcaahngcdmfeangaknmldooml")},
+    { MODKEY|ShiftMask,     XK_c,                       spawn,              SHCMD("brave-bin https://www.desmos.com/calculator")},
     { MODKEY,               XK_f,                       spawn,              SHCMD(TERMINAL " -e lf")},
     { MODKEY,               XK_e,                       spawn,              SHCMD(TERMINAL " -e neomutt")},
     { MODKEY,               XK_g,                       spawn,              SHCMD("gimp")},
     { MODKEY,               XK_m,                       spawn,              SHCMD("musescore")},
     { MODKEY,               XK_r,                       spawn,              SHCMD(TERMINAL " -e newsboat")},
-    { MODKEY,               XK_s,                       spawn,              SHCMD("spotifyd && " TERMINAL " -e spt")},
+    { MODKEY,               XK_s,                       spawn,              SHCMD("spotify")},
     { MODKEY,               XK_y,                       spawn,              SHCMD("myyt")},
     { MODKEY|ShiftMask,     XK_b,                       spawn,              SHCMD("qutebrowser --target private-window")},
     { MODKEY|ShiftMask,     XK_h,                       spawn,              SHCMD(TERMINAL " -e htop")},
