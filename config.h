@@ -118,11 +118,11 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 static Key keys[] = {
     /* modifier             key                         function            argument */
     { MODKEY,               XK_d,                       spawn,              {.v = dmenucmd } },
-    { ControlMask|ShiftMask, XK_t,                  spawn,              {.v = termcmd } },
+    { MODKEY,               XK_Return,                  spawn,              {.v = termcmd } },
     { MODKEY|ShiftMask,     XK_Return,                  togglescratch,      {.ui = 0} },
     { MODKEY,               XK_Tab,                     cyclelayout,        {.i = +1 } },
     { MODKEY,               XK_space,                   togglefloating,     {0} },
-    { Mod1Mask,               XK_F4,                       killclient,         {0} },
+    { MODKEY,               XK_q,                       killclient,         {0} },
     { MODKEY,               XK_0,                       view,               {.ui = ~0 } },
     { MODKEY,               XK_comma,                   focusmon,           {.i = -1 } },
     { MODKEY,               XK_h,                       setmfact,           {.f = -0.05} },
@@ -202,4 +202,3 @@ static Button buttons[] = {
     { ClkTagBar,        MODKEY,         Button1,        tag,            {0} },
     { ClkTagBar,        MODKEY,         Button3,        toggletag,      {0} },
 };
-
