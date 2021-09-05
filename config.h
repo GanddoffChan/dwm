@@ -153,7 +153,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_b,                       spawn,              SHCMD("qutebrowser --target private-window")},
     { MODKEY|ShiftMask,     XK_h,                       spawn,              SHCMD(TERMINAL " -e htop")},
     { MODKEY|ShiftMask,     XK_f,                       spawn,              SHCMD("pcmanfm")},
-    { MODKEY|ShiftMask,     XK_l,                       spawn,              SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\" & (sleep 5 && xset dpms force off)")},
+    { MODKEY|ShiftMask,     XK_l,                       spawn,              SHCMD("slock -m \"$(cowsay $(fortune) | lolcat -ft)\"")},
     { MODKEY|ShiftMask,     XK_p,                       spawn,              SHCMD("doas poweroff")},
     { MODKEY|ShiftMask,     XK_r,                       spawn,              SHCMD("doas reboot")},
     { MODKEY,               XK_v,                       spawn,              SHCMD("virt-manager")},
@@ -202,3 +202,4 @@ static Button buttons[] = {
     { ClkTagBar,        MODKEY,         Button1,        tag,            {0} },
     { ClkTagBar,        MODKEY,         Button3,        toggletag,      {0} },
 };
+
